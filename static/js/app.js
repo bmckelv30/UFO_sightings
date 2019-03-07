@@ -25,7 +25,6 @@ button.on("click", function() {
   var inputElement = d3.select("#datetime");
   // Get the value property of the input element
   var inputValue = inputElement.property("value");
-  console.log(inputValue);
 
   var filteredData = tableData.filter(filter => filter.datetime === inputValue);
   
