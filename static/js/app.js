@@ -1,9 +1,6 @@
 // from data.js
 var tableData = data;
 
-// YOUR CODE HERE!
-console.log(tableData.length);
-
 // Use D3 to select the tbody
 var tbody = d3.select("tbody");
 
@@ -32,7 +29,6 @@ button.on("click", function() {
 
   var filteredData = tableData.filter(filter => filter.datetime === inputValue);
   
-  console.log(filteredData);
   // clear the existing output
   tbody.html("");
 
