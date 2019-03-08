@@ -30,12 +30,11 @@ button.on("click", function() {
   } else {
     // Prevent the page from refreshing
     d3.event.preventDefault(); 
-
+    // Find obs meeting date criteria
     var filteredData = tableData.filter(filter => filter.datetime === inputValue);
-  
     // clear the existing output
     tbody.html("");
-
+    // Add filtered data to table
     filteredData.forEach((filtersight) => {
       // Append one table row per obs
       var row = tbody.append("tr");
