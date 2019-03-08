@@ -10,7 +10,7 @@ tableData.forEach((sight) => {
   var row = tbody.append("tr");
   // Append one cell for each var - cleaner ver
   Object.entries(sight).forEach(([key,value]) => {
-    var cell = tbody.append("td");
+    var cell = row.append("td");
     cell.text(value);
   });
 });
@@ -19,25 +19,31 @@ tableData.forEach((sight) => {
 var button = d3.select("#filter-btn");
 
 button.on("click", function() {
-  // Prevent the page from refreshing
-  d3.event.preventDefault(); 
   // Select the input element and get the raw HTML node
   var inputElement = d3.select("#datetime");
   // Get the value property of the input element
   var inputValue = inputElement.property("value");
 
-  var filteredData = tableData.filter(filter => filter.datetime === inputValue);
-  
-  // clear the existing output
-  tbody.html("");
+  if (inputValue === "" ) {
+    // If value submitted = "", refresh to display all data
+    location.reload();
+  } else {
+    // Prevent the page from refreshing
+    d3.event.preventDefault(); 
 
-  filteredData.forEach((filtersight) => {
-    // Append one table row per obs
-    var row = tbody.append("tr");
-    // Append one cell for each var - cleaner ver
-    Object.entries(filtersight).forEach(([key,value]) => {
-      var cell = tbody.append("td");
-      cell.text(value);
-    });
-  });
+    var filteredData = tableData.filter(filter => filter.datetime === inputValue);
+  
+    // clear the existing output
+    tbody.html("");
+
+    filteredData.forEach((filtersight) => {
+      // Append one table row per obs
+      var row = tbody.append("tr");
+      // Append one cell for each var - cleaner ver
+      Object.entries(filtersight).forEach(([key,value]) => {
+        var cell = row.append("td");
+        cell.text(value);
+      });
+    }); 
+  }
 });
